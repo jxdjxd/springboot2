@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h2>测试获取请求参数</h2>
+
+  <a href="car/1/owner/jxd"> car/{id}/owner/{username} </a>
+  <br>
+
+  <a href="car/1/owner/jxd?age=18&address=beijing"> car/1/owner/jxd?age=18&address=beijing </a>
+  <br>
+
+  <form action="testGetPostMessage" method="post">
+        <label for="userName">用户名：</label>
+        <input id="userName" type="text" name="userName">
+        <label for="password">密码：</label>
+        <input id="password" type="password" name="password">
+        <input value="提交" type="submit">
+  </form>
+  <br>
+
+  <a href="goto">测试获取request域中的数据</a>
+  <br>
+
+  <a href="testMatrix/sell;low=34;brand=byd,audi,yd">测试Matrix矩阵变量</a>
+</body>
+</html>

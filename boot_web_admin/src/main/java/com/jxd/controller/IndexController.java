@@ -1,11 +1,15 @@
 package com.jxd.controller;
 
+import com.jxd.bean.City;
+import com.jxd.bean.Student;
 import com.jxd.bean.User;
+import com.jxd.service.CityService;
+import com.jxd.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +20,12 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 public class IndexController {
+
+    @Autowired
+    StudentService studentService;
+
+    @Autowired
+    CityService cityService;
 
     /**
      * 来登录页
@@ -49,13 +59,32 @@ public class IndexController {
      */
     @GetMapping("/main.html")
     public String mainPage(HttpSession session, Model model){
-        // 判断是否登录
-        Object loginUser = session.getAttribute("loginUser");
-        if(loginUser != null){
-            return "main";
-        }else{
-            model.addAttribute("msg","未登录");
-            return "login";
-        }
+        return "main";
+    }
+
+    @ResponseBody
+    @GetMapping("/getStudent")
+    public Student getStudent(@RequestParam("id") Long id){
+        return studentService.getStudentById(id);
+    }
+
+    @ResponseBody
+    @GetMapping("/city")
+    public City getCityById(@RequestParam("id") Long id){
+        return cityService.getById(id);
+    }
+
+    @ResponseBody
+    @PostMapping("/city")
+    public City insertCity(City city){
+        cityService.insertCity(city);
+        return city;
+    }
+
+    @ResponseBody
+    @PostMapping("/insertCity")
+    public City insertCityUseAnnotation(City city){
+        cityService.insertCityUseAnnotation(city);
+        return city;
     }
 }
